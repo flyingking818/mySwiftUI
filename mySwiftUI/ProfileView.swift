@@ -11,7 +11,7 @@ struct ProfileView: View {
     //Declare some properties
     
     @State private var newComment: String = ""
-    @State private var Comments: [String] = []
+    @State private var comments: [String] = []
     
     
     var body: some View {
@@ -48,12 +48,44 @@ struct ProfileView: View {
                 }
                 .padding()
                 
+                //Adds the comment to the comments array — at the top (index 0), not the end.
+                Button(action: {
+                    if !newComment.trimmingCharacters(in: .whitespaces).isEmpty {
+                        comments.insert(newComment, at: 0)
+                        newComment = ""
+                    }
+                }) {
+                    Text("Post Comment 🎉")
+                        .foregroundColor(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.orange)
+                        .cornerRadius(12)
+                }
+                .padding(.horizontal)
                 
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ForEach(comments, id: \.self) { comment in
+                            Text("💬 \(comment)")
+                                .padding()
+                                .background(Color.white.opacity(0.15))
+                                .cornerRadius(10)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding()
+                }
                 
+                Spacer()
             }
+            .padding()
+            
+            
         }
     }
 }
+
 
 #Preview {
     ProfileView()
