@@ -37,6 +37,11 @@ struct mySwiftUIApp: App {
                         Image(systemName: "person.crop.circle")
                         Text("Profile")
                     }
+                ChatView()
+                    .tabItem {
+                        Image(systemName: "bubble.right.circle")
+                        Text("Ask Saint")
+                    }
             }
             
         }
